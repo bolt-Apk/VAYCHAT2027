@@ -1,0 +1,20 @@
+[functions.auth-signup]
+verify_jwt = false
+
+[functions.check-password]
+verify_jwt = false
+
+[functions.check-push-receipts]
+verify_jwt = false
+
+[functions.link-preview]
+verify_jwt = true
+
+[functions.process-scheduled-messages]
+verify_jwt = false
+
+[functions.send-push-notification]
+verify_jwt = false
+
+[functions.turn-credentials]
+verify_jwt = true

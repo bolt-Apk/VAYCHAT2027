@@ -254,7 +254,7 @@ export default function LoginScreen() {
           const signUpResponse = await fetch(`${supabaseUrl}/functions/v1/auth-signup`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${anonKey}` },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password, phone }),
           });
           const signUpResult = await signUpResponse.json();
 
@@ -279,11 +279,6 @@ export default function LoginScreen() {
               setError('Аккаунт создан. Войдите ещё раз.');
               shakeCard();
             } else {
-              await supabase.from('profiles').insert({
-                id: signUpResult.user.id,
-                phone,
-                display_name: '',
-              });
               router.replace('/setup-profile');
             }
           }

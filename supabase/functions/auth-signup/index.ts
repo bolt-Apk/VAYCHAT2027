@@ -20,7 +20,7 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { email, password } = await req.json();
+    const { email, password, phone, display_name } = await req.json();
 
     if (!email || !password) {
       return new Response(JSON.stringify({ error: "Email and password required" }), {
@@ -59,6 +59,17 @@ Deno.serve(async (req: Request) => {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    // Create profile row server-side (bypasses RLS)
+    const { error: profileError } = await adminClient.from("profiles").upsert({
+      id: data.user.id,
+      phone: phone || email,
+      display_name: display_name || "",
+    }, { onConflict: "id" });
+
+    if (profileError) {
+      console.error("Profile creation error:", profileError);
     }
 
     return new Response(JSON.stringify({ user: { id: data.user.id, email: data.user.email } }), {

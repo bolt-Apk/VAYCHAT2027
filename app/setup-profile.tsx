@@ -110,8 +110,7 @@ export default function SetupProfileScreen() {
 
       const { error: updateError } = await supabase
         .from('profiles')
-        .update(updates)
-        .eq('id', user?.id);
+        .upsert({ id: user?.id, phone: user?.email || '', ...updates }, { onConflict: 'id' });
 
       if (updateError) {
         setError('Ошибка сохранения. Попробуйте ещё раз.');
