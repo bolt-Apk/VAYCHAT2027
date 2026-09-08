@@ -262,8 +262,13 @@ export function ProfileContent() {
         setUploadProgress(0);
         return;
       }
-      await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
-      loadProfile();
+      const { error: updateErr } = await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
+      if (updateErr) {
+        setAvatarError(updateErr.message);
+      } else {
+        setProfile(prev => prev ? { ...prev, avatar_url: publicUrl } : prev);
+        loadProfile();
+      }
     } catch (e: any) {
       setAvatarError(e?.message || 'Не удалось загрузить фото');
     }
@@ -288,8 +293,13 @@ export function ProfileContent() {
       );
       if (error) throw new Error(error);
       if (publicUrl) {
-        await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
-        loadProfile();
+        const { error: updateErr } = await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
+        if (updateErr) {
+          setAvatarError(updateErr.message);
+        } else {
+          setProfile(prev => prev ? { ...prev, avatar_url: publicUrl } : prev);
+          loadProfile();
+        }
       }
     } catch (e: any) {
       console.warn('Avatar upload error:', e);
@@ -314,8 +324,13 @@ export function ProfileContent() {
       );
       if (error) throw new Error(error);
       if (publicUrl) {
-        await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
-        loadProfile();
+        const { error: updateErr } = await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
+        if (updateErr) {
+          setAvatarError(updateErr.message);
+        } else {
+          setProfile(prev => prev ? { ...prev, avatar_url: publicUrl } : prev);
+          loadProfile();
+        }
       }
     } catch (e: any) {
       setAvatarError(e?.message || 'Не удалось загрузить фото');

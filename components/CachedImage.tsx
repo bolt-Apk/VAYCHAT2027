@@ -78,6 +78,7 @@ export default memo(function CachedImage({
   const [manualLoad, setManualLoad] = useState(false);
   const shimmerAnim = useRef(new Animated.Value(0)).current;
   const [loaded, setLoaded] = useState(false);
+  const [errored, setErrored] = useState(false);
   const { ref: viewportRef, isVisible } = useIsInViewport();
 
   const shouldLoad = (!respectAutoDownload || autoDownloadAllowed || manualLoad) && isVisible;
@@ -132,16 +133,21 @@ export default memo(function CachedImage({
         />
       )}
       {!loaded && !useShimmer && <View style={[StyleSheet.absoluteFill, ss.shimmer, { opacity: 0.5 }]} />}
-      <Image
-        source={{ uri, width: perf.tier === 'low' ? 320 : undefined }}
-        style={[StyleSheet.absoluteFill]}
-        contentFit={contentFit}
-        cachePolicy="memory-disk"
-        transition={perf.reducedMotion ? 0 : 200}
-        recyclingKey={uri}
-        fadeDuration={perf.reducedMotion ? 0 : 200}
-        onLoad={() => setLoaded(true)}
-      />
+      {errored && Platform.OS === 'web' ? (
+        <img src={uri} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: contentFit === 'contain' ? 'contain' : 'cover' }} onLoad={() => setLoaded(true)} />
+      ) : (
+        <Image
+          source={{ uri, width: perf.tier === 'low' ? 320 : undefined }}
+          style={[StyleSheet.absoluteFill]}
+          contentFit={contentFit}
+          cachePolicy="memory-disk"
+          transition={perf.reducedMotion ? 0 : 200}
+          recyclingKey={uri}
+          fadeDuration={perf.reducedMotion ? 0 : 200}
+          onLoad={() => setLoaded(true)}
+          onError={() => setErrored(true)}
+        />
+      )}
     </View>
   );
 });
