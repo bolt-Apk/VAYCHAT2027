@@ -1,0 +1,155 @@
+{
+  "expo": {
+    "owner": "sever-ahmat-2",
+    "name": "VayChat",
+    "slug": "vaychatnews",
+    "version": "4.8.2",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "vaychat",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "9",
+      "bundleIdentifier": "com.vaychat.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "VayChat needs access to your microphone to record and send voice messages in chats and to make voice and video calls with your contacts. For example, you can hold the record button to send a voice message in a conversation.",
+        "NSCameraUsageDescription": "VayChat needs access to your camera to take photos and record videos for sharing in chats, and to make video calls with your contacts. For example, you can capture a photo and send it directly in a conversation.",
+        "NSPhotoLibraryUsageDescription": "VayChat needs access to your photo library so you can select and send photos or videos to your contacts in chat conversations. For example, you can choose a photo from your gallery and attach it to a message in any chat.",
+        "NSLocationWhenInUseUsageDescription": "VayChat needs your location so you can share your current position with contacts in a chat. For example, you can send your location to help a friend find you.",
+        "NSContactsUsageDescription": "VayChat checks your device contacts to find people who are already using the app, so you can easily start conversations with them. For example, if a friend has VayChat, they will appear in your contacts list. Contact data is only used for matching and is never stored on our servers.",
+        "UIBackgroundModes": [
+          "voip",
+          "audio",
+          "remote-notification"
+        ],
+        "UIDeviceProximityMonitoring": true
+      }
+    },
+    "android": {
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.vaychat.app",
+      "versionCode": 8,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.VIBRATE",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.READ_CONTACTS",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.READ_MEDIA_AUDIO",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0E1621"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-notifications",
+        {
+          "sounds": [],
+          "androidMode": "default",
+          "androidCollapsedTitle": "VayChat"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "VayChat needs access to your photo library so you can select and send photos or videos to your contacts in chat conversations. For example, you can attach a photo from your library to a message.",
+          "cameraPermission": "VayChat needs access to your camera to take photos and record videos for sharing in chats, and to make video calls with your contacts. For example, you can capture a photo and send it directly in a conversation."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "VayChat needs your location so you can share your current position with contacts in a chat. For example, you can send your location to help a friend find you."
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "VayChat needs access to your microphone to record and send voice messages in chats and to make voice and video calls with your contacts. For example, you can hold the record button to send a voice message in a conversation."
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "VayChat checks your contacts to find people who are already using the app, so you can easily start conversations with them. Contact data is only used for matching and is not stored on our servers."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "VayChat needs access to your media library to save and share photos and videos in chat conversations. For example, you can save a photo received in a chat to your device gallery.",
+          "savePhotosPermission": "VayChat needs permission to save photos and videos received in chats to your device gallery. For example, you can tap 'Save' on a photo to keep it in your library.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      "expo-local-authentication",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          },
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 24
+          }
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "./plugins/withNotificationServiceExtension",
+      "./plugins/withCocoaPodsSigningFix"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4683a256-3d3b-4814-a83c-6ec49c96b819",
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "NotificationServiceExtension",
+                  "bundleIdentifier": "com.vaychat.app.NotificationServiceExtension"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

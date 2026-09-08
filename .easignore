@@ -1,0 +1,34 @@
+# dependencies (installed on EAS servers)
+node_modules/
+
+# expo build artifacts
+.expo/
+dist/
+web-build/
+
+# native
+*.orig.*
+
+# metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macos
+.DS_Store
+
+# typescript
+*.tsbuildinfo
+
+# large/unnecessary public files
+public/screenshot.png
+public/image copy*.png
+public/files_*.png
+
+# not needed for build
+supabase/
+*.p8
+assets/images/files_*
